@@ -22,7 +22,7 @@ class PeopleController extends Controller
             'address'       => 'required|string',
             'type'          => 'required|in:0,1',
             'phone'         => 'required|regex:/^[0-9]{10}$/',
-            'nid'           => 'required|regex:/^[0-9]{10}$/',
+            'nid'           => 'regex:/^[0-9]{10}$/',
         ]);
         People::create($formData);
         return redirect('/')->with('success', 'Form submitted successfully!');

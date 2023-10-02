@@ -32,8 +32,12 @@
         <div class="mt-6">
             <button type="submit" class="bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-white hover:text-gray-700">Submit</button>
         </div>
-        @error('name')
-            <span class="text-red-500">{{ $message }}</span>
-        @enderror
+        @if ($errors->any())
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li class="text-red-500">{{$error}}</li>
+                @endforeach
+            </ul>
+        @endif
     </form>
 </x-guest-layout>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PeopleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,3 +30,7 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::get('/people', [PeopleController::class, 'list'])->name('people.list');
+Route::get('/people/create', [PeopleController::class, 'create'])->name('people.create');
+Route::post('/people/store', [PeopleController::class, 'store'])->name('people.store');

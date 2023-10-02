@@ -7,8 +7,9 @@ use App\Models\People;
 
 class PeopleController extends Controller
 {
-    public function list(Request $request) {
-        return view('people.create');
+    public function list() {
+        $people = People::all();
+        return view('people.list', ['people' => $people]);
     }
 
     public function create(Request $request) {

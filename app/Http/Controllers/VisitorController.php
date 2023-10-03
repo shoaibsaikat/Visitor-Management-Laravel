@@ -13,8 +13,8 @@ class VisitorController extends Controller
     }
 
     public function create(Request $request) {
-        $officer = People::where('type', 0)->orderBy('designation')->get();
-        return view('visitor.create');
+        $officers = People::where('type', 0)->orderBy('designation')->get();
+        return view('visitor.create', ['officers' => $officers]);
     }
 
     public function store(Request $request) {

@@ -1,6 +1,6 @@
 <x-guest-layout>
     <h1 class="text-2xl font-semibold mb-6 text-white">Personal Information Form</h1>
-    <form action="{{route('people.store')}}" method="post">
+    <form action="{{route('officer.store')}}" method="post">
         @csrf
         <div class="mb-4">
             <label for="name" class="block text-white font-bold">Name:</label>
@@ -13,13 +13,6 @@
         <div class="mb-4">
             <label for="address" class="block text-white font-bold">Address:</label>
             <textarea id="address" name="address" class="w-full border rounded-md px-3 py-2 text-gray-700" required></textarea>
-        </div>
-        <div class="mb-4">
-            <label for="type" class="block text-white font-bold">Type:</label>
-            <select id="type" name="type" class="w-full border rounded-md px-3 py-2 text-gray-700" required>
-                <option value="0">Officer</option>
-                <option value="1">Visitor</option>
-            </select>
         </div>
         <div class="mb-4">
             <label for="phone" class="block text-white font-bold">Phone: (10 characters)</label>

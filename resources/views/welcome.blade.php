@@ -14,5 +14,5 @@
     @endif
     </div>
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <div class="text-white"><a href="{{route('people.create')}}">Create People</a></div>
+    <div class="text-white"><a href="{{route('officer.create')}}">Add Officer</a></div>
 </x-guest-layout>

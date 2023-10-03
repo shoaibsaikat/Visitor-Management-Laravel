@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('content')
     <h1 class="text-2xl font-semibold mb-6 text-white">Visitor Information Form</h1>
-    <form action="{{route('people.store')}}" method="post">
+    <form action="{{route('visitor.store')}}" method="post">
         @csrf
         <div class="mb-4">
             <label for="name" class="block text-white font-bold">Name:</label>

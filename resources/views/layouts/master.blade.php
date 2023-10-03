@@ -14,11 +14,9 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans container mx-auto py-20 px-20">
-
-        <div class="mx-auto mt-8 dark:bg-gray-900 text-white">
+    <body class="font-sans dark:bg-gray-900 text-white antialiased">
+        <div class="container mx-auto py-20 px-52">
             @yield('content')
         </div>
-
     </body>
 </html>

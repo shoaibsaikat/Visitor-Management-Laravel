@@ -13,9 +13,7 @@
         </div>
     @endif
     </div>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     @if (session()->has('success'))
         <div class="text-white">{{session('success')}}</div>
     @endif
-    <div class="text-white"><a href="{{route('officer.create')}}">Add Officer</a></div>
 </x-guest-layout>

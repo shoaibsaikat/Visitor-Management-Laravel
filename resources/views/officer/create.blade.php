@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('content')
-    <h1 class="text-2xl font-semibold mb-6 text-white">Personal Information Form</h1>
+    <h1 class="text-2xl font-semibold mb-6 text-white">Officer Information Form</h1>
     <form action="{{route('officer.store')}}" method="post">
         @csrf
         <div class="mb-4">

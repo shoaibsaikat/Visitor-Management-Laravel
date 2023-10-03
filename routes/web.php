@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\OfficerController;
+use App\Http\Controllers\VisitorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -31,6 +32,12 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
+// Officer
 Route::get('/officer', [OfficerController::class, 'list'])->name('officer.list');
 Route::get('/officer/create', [OfficerController::class, 'create'])->name('officer.create');
 Route::post('/officer/store', [OfficerController::class, 'store'])->name('officer.store');
+
+// Visitor
+Route::get('/visitor', [VisitorController::class, 'list'])->name('visitor.list');
+Route::get('/visitor/create', [VisitorController::class, 'create'])->name('visitor.create');
+Route::post('/visitor/store', [VisitorController::class, 'store'])->name('visitor.store');

@@ -5,15 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\People;
 
-class OfficerController extends Controller
+class VisitorController extends Controller
 {
     public function list() {
-        $officer = People::where('type', 0)->orderBy('designation')->get();
-        return view('officer.list', ['people' => $officer]);
+        $visitor = People::where('type', 1)->orderBy('designation')->get();
+        return view('visitor.list', ['people' => $visitor]);
     }
 
     public function create(Request $request) {
-        return view('officer.create');
+        $officer = People::where('type', 0)->orderBy('designation')->get();
+        return view('visitor.create');
     }
 
     public function store(Request $request) {
@@ -23,6 +24,7 @@ class OfficerController extends Controller
             'address'       => 'required|string',
             'phone'         => 'required|regex:/^[0-9]{10}$/',
             'nid'           => 'nullable|regex:/^[0-9]{10}$/',
+            'officer'       => 'required|regex:/^[0-9]{10}$/',
         ]);
 
         People::create([
@@ -31,8 +33,8 @@ class OfficerController extends Controller
             'address' => $formData['address'],
             'phone' => $formData['phone'],
             'nid' => $formData['nid'],
-            'type' => 0,
+            'type' => 1,
         ]);
-        return redirect(route('welcome'))->with('success', 'Officer created successfully!');
+        return redirect(route('welcome'))->with('success', 'Visit created successfully!');
     }
 }

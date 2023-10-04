@@ -36,6 +36,8 @@ require __DIR__.'/auth.php';
 Route::get('/officer', [OfficerController::class, 'list'])->name('officer.list');
 Route::get('/officer/create', [OfficerController::class, 'create'])->name('officer.create');
 Route::post('/officer/store', [OfficerController::class, 'store'])->name('officer.store');
+Route::get('/officer/{person}/edit', [OfficerController::class, 'edit'])->name('officer.edit');
+Route::get('/officer/{person}/update', [OfficerController::class, 'update'])->name('officer.update');
 
 // Visitor
 Route::get('/visitor', [VisitorController::class, 'list'])->name('visitor.list');

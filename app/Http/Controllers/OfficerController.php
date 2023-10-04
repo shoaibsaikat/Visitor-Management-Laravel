@@ -35,4 +35,28 @@ class OfficerController extends Controller
         ]);
         return redirect(route('welcome'))->with('success', 'Officer created successfully!');
     }
+
+    public function edit(People $person) {
+        return view('officer.edit', ['people' => $person]);
+    }
+
+    public function update(Request $request) {
+        $formData = $request->validate([
+            'name'          => 'required|string|max:255',
+            'designation'   => 'required|string|max:255',
+            'address'       => 'required|string',
+            'phone'         => 'required|regex:/^[0-9]{10}$/',
+            'nid'           => 'nullable|regex:/^[0-9]{10}$/',
+        ]);
+
+        People::create([
+            'name' => $formData['name'],
+            'designation' => $formData['designation'],
+            'address' => $formData['address'],
+            'phone' => $formData['phone'],
+            'nid' => $formData['nid'],
+            'type' => 0,
+        ]);
+        return redirect(route('welcome'))->with('success', 'Officer updated successfully!');
+    }
 }

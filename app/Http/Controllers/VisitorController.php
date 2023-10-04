@@ -9,8 +9,8 @@ use App\Models\VisitorHistory;
 class VisitorController extends Controller
 {
     public function list() {
-        $visitors = People::where('type', 1)->orderBy('designation')->get();
-        return view('visitor.list', ['people' => $visitors]);
+        $visits = People::where('type', 1)->orderBy('designation')->get();
+        return view('visitor.list', ['people' => $visits]);
     }
 
     public function create() {
@@ -36,7 +36,6 @@ class VisitorController extends Controller
             'nid' => $formData['nid'],
             'type' => 1,
         ]);
-
         $history = new VisitorHistory;
         $history->card_no = $formData['card'];
         $history->officer_id = $formData['officer'];

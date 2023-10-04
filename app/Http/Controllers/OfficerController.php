@@ -37,10 +37,10 @@ class OfficerController extends Controller
     }
 
     public function edit(People $person) {
-        return view('officer.edit', ['people' => $person]);
+        return view('officer.edit', ['person' => $person]);
     }
 
-    public function update(Request $request) {
+    public function update(Request $request, People $person) {
         $formData = $request->validate([
             'name'          => 'required|string|max:255',
             'designation'   => 'required|string|max:255',
@@ -49,14 +49,7 @@ class OfficerController extends Controller
             'nid'           => 'nullable|regex:/^[0-9]{10}$/',
         ]);
 
-        People::create([
-            'name' => $formData['name'],
-            'designation' => $formData['designation'],
-            'address' => $formData['address'],
-            'phone' => $formData['phone'],
-            'nid' => $formData['nid'],
-            'type' => 0,
-        ]);
-        return redirect(route('welcome'))->with('success', 'Officer updated successfully!');
+        $person->update($formData);
+        return redirect(route('officer.list'))->with('success', 'Officer information updated!');
     }
 }

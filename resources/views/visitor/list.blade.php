@@ -14,7 +14,6 @@
             </thead>
             <tbody class="bg-gray-800 divide-y divide-gray-600">
                 @foreach ($people as $info)
-                    @if ($info->type == 0)
                     <tr>
                         <td class="px-6 py-4 whitespace-no-wrap">{{ $info->name }}</td>
                         <td class="px-6 py-4 whitespace-no-wrap">{{ $info->designation }}</td>
@@ -24,7 +23,6 @@
                             <a href="#" class="text-indigo-400 hover:text-indigo-600">View</a>
                         </td>
                     </tr>
-                    @endif
                 @endforeach
             </tbody>
         </table>

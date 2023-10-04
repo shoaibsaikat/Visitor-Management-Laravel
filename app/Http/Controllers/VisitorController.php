@@ -9,8 +9,8 @@ use App\Models\VisitorHistory;
 class VisitorController extends Controller
 {
     public function list() {
-        $visitor = People::where('type', 1)->orderBy('designation')->get();
-        return view('visitor.list', ['people' => $visitor]);
+        $visitors = People::where('type', 1)->orderBy('designation')->get();
+        return view('visitor.list', ['people' => $visitors]);
     }
 
     public function create() {

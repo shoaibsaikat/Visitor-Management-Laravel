@@ -12,7 +12,7 @@ class OfficerController extends Controller
         return view('officer.list', ['people' => $officer]);
     }
 
-    public function create(Request $request) {
+    public function create() {
         return view('officer.create');
     }
 

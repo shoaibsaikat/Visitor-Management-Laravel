@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\People;
+use App\Models\VisitorHistory;
 
 class VisitorController extends Controller
 {
@@ -12,7 +13,7 @@ class VisitorController extends Controller
         return view('visitor.list', ['people' => $visitor]);
     }
 
-    public function create(Request $request) {
+    public function create() {
         $officers = People::where('type', 0)->orderBy('designation')->get();
         return view('visitor.create', ['officers' => $officers]);
     }
@@ -24,10 +25,10 @@ class VisitorController extends Controller
             'address'       => 'required|string',
             'phone'         => 'required|regex:/^[0-9]{10}$/',
             'nid'           => 'nullable|regex:/^[0-9]{10}$/',
-            'officer'       => 'required|regex:/^[0-9]{10}$/',
+            'card'          => 'required|integer|min:0',
+            'officer'       => 'required|integer|min:0',
         ]);
-
-        People::create([
+        $visitor = People::create([
             'name' => $formData['name'],
             'designation' => $formData['designation'],
             'address' => $formData['address'],
@@ -35,6 +36,13 @@ class VisitorController extends Controller
             'nid' => $formData['nid'],
             'type' => 1,
         ]);
+
+        $history = new VisitorHistory;
+        $history->card_no = $formData['card'];
+        $history->officer_id = $formData['officer'];
+        $history->visitor_id = $visitor->id;
+        $history->save();
+
         return redirect(route('welcome'))->with('success', 'Visit created successfully!');
     }
 }

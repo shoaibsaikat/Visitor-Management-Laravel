@@ -12,6 +12,10 @@
             <input type="text" id="designation" name="designation" class="w-full border rounded-md px-3 py-2 text-gray-700" required>
         </div>
         <div class="mb-4">
+            <label for="card_no" class="block text-white font-bold">Card No:</label>
+            <input type="number" id="card_no" name="card" class="w-full border rounded-md px-3 py-2 text-gray-700">
+        </div>
+        <div class="mb-4">
             <label for="address" class="block text-white font-bold">Address:</label>
             <textarea id="address" name="address" class="w-full border rounded-md px-3 py-2 text-gray-700" required></textarea>
         </div>
@@ -24,8 +28,8 @@
             <input type="text" id="nid" name="nid" pattern="[0-9]{10}" class="w-full border rounded-md px-3 py-2 text-gray-700">
         </div>
         <div class="mt-4">
-            <label for="items" class="block text-white font-bold">Select an Item:</label>
-            <select id="items" name="items" class="block w-full rounded-md py-2 px-3 mt-1 text-gray-700">
+            <label for="officers" class="block text-white font-bold">Select an Item:</label>
+            <select id="officers" name="officer" class="block w-full rounded-md py-2 px-3 mt-1 text-gray-700">
                 @foreach ($officers as $item)
                     <option value="{{$item->id}}">{{$item->name}}</option>
                 @endforeach

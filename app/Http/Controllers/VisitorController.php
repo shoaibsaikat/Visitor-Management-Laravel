@@ -14,8 +14,37 @@ class VisitorController extends Controller
     }
 
     public function create() {
+        $visitor = [
+            'name'          => NULL,
+            'designation'   => NULL,
+            'card'          => NULL,
+            'address'       => NULL,
+            'phone'         => NULL,
+            'nid'           => NULL
+        ];
         $officers = People::where('type', 0)->orderBy('designation')->get();
-        return view('visitor.create', ['officers' => $officers]);
+        return view('visitor.create', ['officers' => $officers, 'visitor' => $visitor]);
+    }
+
+    public function search() {
+        $formData = request()->validate([
+            'phone' => 'required|regex:/^[0-9]{10}$/',
+        ]);
+        $visitor = People::where([
+            ['phone', $formData['phone']],
+        ])->first();
+        if (is_null($visitor)) {
+            $visitor = [
+                'name'          => NULL,
+                'designation'   => NULL,
+                'card'          => NULL,
+                'address'       => NULL,
+                'phone'         => $formData['phone'],
+                'nid'           => NULL
+            ];
+        }
+        $officers = People::where('type', 0)->orderBy('designation')->get();
+        return view('visitor.create', ['officers' => $officers, 'visitor' => $visitor]);
     }
 
     public function store(Request $request) {
@@ -28,14 +57,17 @@ class VisitorController extends Controller
             'card'          => 'required|integer|min:0',
             'officer'       => 'required|integer|min:0',
         ]);
-        $visitor = People::create([
-            'name' => $formData['name'],
-            'designation' => $formData['designation'],
-            'address' => $formData['address'],
-            'phone' => $formData['phone'],
-            'nid' => $formData['nid'],
-            'type' => 1,
-        ]);
+        $visitor = People::where('phone', $formData['phone'])->first();
+        if (is_null($visitor)) {
+            $visitor = People::create([
+                'name' => $formData['name'],
+                'designation' => $formData['designation'],
+                'address' => $formData['address'],
+                'phone' => $formData['phone'],
+                'nid' => $formData['nid'],
+                'type' => 1,
+            ]);
+        }        
         $history = new VisitorHistory;
         $history->card_no = $formData['card'];
         $history->officer_id = $formData['officer'];

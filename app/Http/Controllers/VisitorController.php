@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\People;
 use App\Models\VisitorHistory;
@@ -30,9 +31,7 @@ class VisitorController extends Controller
         $formData = request()->validate([
             'phone' => 'required|regex:/^[0-9]{10}$/',
         ]);
-        $visitor = People::where([
-            ['phone', $formData['phone']],
-        ])->first();
+        $visitor = People::where('phone', $formData['phone'])->first();
         if (is_null($visitor)) {
             $visitor = [
                 'name'          => NULL,

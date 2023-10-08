@@ -88,4 +88,25 @@ class VisitorController extends Controller
 
         return redirect(route('visitor.list'))->with('success', 'Visit created!');
     }
+
+    public function report(Request $request) {
+        $formData = $request->validate([
+            'from'  => 'required|date',
+            'to'    => 'required|date',
+        ]);
+        $visits = DB::table('visitor_histories as histories')
+                    ->join('people as officers', 'officers.id', '=', 'histories.officer_id')
+                    ->join('people as visitors', 'visitors.id', '=', 'histories.visitor_id')
+                    ->whereDate('histories.created_at', '>=', $formData['from'])
+                    ->whereDate('histories.created_at', '<=', $formData['to'])
+                    // ->whereBetween('created_at', [$formData['from'], $formData['to']])
+                    ->select('histories.*',
+                            'officers.name as officer_name',
+                            'visitors.name as visitor_name',
+                            'visitors.designation as designation',
+                            'visitors.phone as phone')
+                    ->orderByDesc('histories.created_at')
+                    ->get();
+        return view('visitor.list', ['people' => $visits]);
+    }
 }

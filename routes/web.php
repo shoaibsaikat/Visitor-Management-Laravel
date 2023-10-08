@@ -44,3 +44,7 @@ Route::get('/visitor', [VisitorController::class, 'list'])->name('visitor.list')
 Route::get('/visitor/create', [VisitorController::class, 'create'])->name('visitor.create');
 Route::post('/visitor/store', [VisitorController::class, 'store'])->name('visitor.store');
 Route::post('/visitor/search', [VisitorController::class, 'search'])->name('visitor.search');
+Route::get('/visitor/report', function() {
+    return view('visitor.report');
+})->name('visitor.report');
+Route::post('/visitor/report', [VisitorController::class, 'report'])->name('visitor.report');

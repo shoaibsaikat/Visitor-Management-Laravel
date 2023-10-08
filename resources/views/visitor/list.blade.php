@@ -9,8 +9,8 @@
                     <th class="px-6 py-3 text-left text-xs leading-4 font-medium uppercase">Officer</th>
                     <th class="px-6 py-3 text-left text-xs leading-4 font-medium uppercase">Designation</th>
                     <th class="px-6 py-3 text-left text-xs leading-4 font-medium uppercase">Phone</th>
+                    <th class="px-6 py-3 text-left text-xs leading-4 font-medium uppercase">Card No</th>
                     <th class="px-6 py-3 text-left text-xs leading-4 font-medium uppercase">Date</th>
-                    <th class="px-6 py-3"></th>
                 </tr>
             </thead>
             <tbody class="bg-gray-800 divide-y divide-gray-600">
@@ -20,6 +20,7 @@
                         <td class="px-6 py-4 whitespace-no-wrap">{{ $info->officer_name }}</td>
                         <td class="px-6 py-4 whitespace-no-wrap">{{ $info->designation }}</td>
                         <td class="px-6 py-4 whitespace-no-wrap">{{ $info->phone }}</td>
+                        <td class="px-6 py-4 whitespace-no-wrap">{{ $info->card_no }}</td>
                         <td class="px-6 py-4 whitespace-no-wrap">{{ $info->created_at }}</td>
                     </tr>
                 @endforeach

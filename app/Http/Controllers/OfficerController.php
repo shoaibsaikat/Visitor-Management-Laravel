@@ -8,7 +8,7 @@ use App\Models\People;
 class OfficerController extends Controller
 {
     public function list() {
-        $officer = People::where('type', 0)->orderBy('designation')->get();
+        $officer = People::where('type', 0)->orderByDesc('designation')->get();
         return view('officer.list', ['people' => $officer]);
     }
 
@@ -26,12 +26,12 @@ class OfficerController extends Controller
         ]);
 
         People::create([
-            'name' => $formData['name'],
-            'designation' => $formData['designation'],
-            'address' => $formData['address'],
-            'phone' => $formData['phone'],
-            'nid' => $formData['nid'],
-            'type' => 0,
+            'name'          => $formData['name'],
+            'designation'   => $formData['designation'],
+            'address'       => $formData['address'],
+            'phone'         => $formData['phone'],
+            'nid'           => $formData['nid'],
+            'type'          => 0,
         ]);
         return redirect(route('welcome'))->with('success', 'Officer created!');
     }

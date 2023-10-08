@@ -19,7 +19,7 @@ class VisitorController extends Controller
                             'visitors.designation as designation',
                             'visitors.phone as phone')
                     ->orderByDesc('histories.created_at')
-                    ->get();
+                    ->paginate(10);
         // DB::raw('SELECT visitor_histories.*, visitor.name, officer.name 
         // FROM visitor_histories 
         // INNER JOIN people AS officer ON officer.id = visitor_histories.officer_id 
@@ -99,14 +99,13 @@ class VisitorController extends Controller
                     ->join('people as visitors', 'visitors.id', '=', 'histories.visitor_id')
                     ->whereDate('histories.created_at', '>=', $formData['from'])
                     ->whereDate('histories.created_at', '<=', $formData['to'])
-                    // ->whereBetween('created_at', [$formData['from'], $formData['to']])
                     ->select('histories.*',
                             'officers.name as officer_name',
                             'visitors.name as visitor_name',
                             'visitors.designation as designation',
                             'visitors.phone as phone')
                     ->orderByDesc('histories.created_at')
-                    ->get();
+                    ->paginate(10);;
         return view('visitor.list', ['people' => $visits]);
     }
 }

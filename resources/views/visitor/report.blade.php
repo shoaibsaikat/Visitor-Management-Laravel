@@ -6,11 +6,11 @@
             <form method="POST" action="{{route('visitor.report')}}">
                 @csrf
                 <div class="mb-4">
-                    <label for="from" class="block text-gray-400 font-bold">From:</label>
+                    <label for="from" class="block font-bold">From:</label>
                     <input type="date" id="from" name="from" class="w-full border-gray-700 rounded-md px-3 py-2 dark:bg-gray-700 dark:border-gray-600 dark:text-white" required>
                 </div>
                 <div class="mb-4">
-                    <label for="to" class="block text-gray-400 font-bold">To:</label>
+                    <label for="to" class="block font-bold">To:</label>
                     <input type="date" id="to" name="to" class="w-full border-gray-700 rounded-md px-3 py-2 dark:bg-gray-700 dark:border-gray-600 dark:text-white" required>
                 </div>
                 <div class="mt-6">

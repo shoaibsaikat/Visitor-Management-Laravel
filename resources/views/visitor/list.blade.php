@@ -26,5 +26,6 @@
                 @endforeach
             </tbody>
         </table>
+        {{ $people->links(); }}
     </div>
 @stop

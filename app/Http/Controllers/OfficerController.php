@@ -33,7 +33,7 @@ class OfficerController extends Controller
             'nid' => $formData['nid'],
             'type' => 0,
         ]);
-        return redirect(route('welcome'))->with('success', 'Officer created successfully!');
+        return redirect(route('welcome'))->with('success', 'Officer created!');
     }
 
     public function edit(People $person) {

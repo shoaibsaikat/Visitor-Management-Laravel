@@ -21,9 +21,6 @@
                         <td class="px-6 py-4 whitespace-no-wrap">{{ $info->designation }}</td>
                         <td class="px-6 py-4 whitespace-no-wrap">{{ $info->phone }}</td>
                         <td class="px-6 py-4 whitespace-no-wrap">{{ $info->created_at }}</td>
-                        <td class="px-6 py-4 ">
-                            <a href="#" class="text-indigo-400 hover:text-indigo-600">View</a>
-                        </td>
                     </tr>
                 @endforeach
             </tbody>

@@ -86,6 +86,6 @@ class VisitorController extends Controller
         $history->visitor_id = $visitor->id;
         $history->save();
 
-        return redirect(route('welcome'))->with('success', 'Visit created successfully!');
+        return redirect(route('visitor.list'))->with('success', 'Visit created!');
     }
 }

@@ -48,3 +48,4 @@ Route::get('/visitor/report', function() {
     return view('visitor.report');
 })->name('visitor.report');
 Route::post('/visitor/report', [VisitorController::class, 'report'])->name('visitor.report');
+Route::get('/visitor/paged_report/{from}/{to}', [VisitorController::class, 'paged_report'])->name('visitor.paged_report');

@@ -24,7 +24,7 @@ class VisitorController extends Controller
         // FROM visitor_histories 
         // INNER JOIN people AS officer ON officer.id = visitor_histories.officer_id 
         // INNER JOIN people AS visitor ON visitor.id = visitor_histories.officer_id');
-        return view('visitor.list', ['people' => $visits]);
+        return view('visitor.list', ['visits' => $visits]);
     }
 
     public function create() {
@@ -94,18 +94,22 @@ class VisitorController extends Controller
             'from'  => 'required|date',
             'to'    => 'required|date',
         ]);
+        return redirect(route('visitor.paged_report', ['from' => $formData['from'], 'to' => $formData['to']]));
+    }
+
+    public function paged_report($from, $to) {
         $visits = DB::table('visitor_histories as histories')
                     ->join('people as officers', 'officers.id', '=', 'histories.officer_id')
                     ->join('people as visitors', 'visitors.id', '=', 'histories.visitor_id')
-                    ->whereDate('histories.created_at', '>=', $formData['from'])
-                    ->whereDate('histories.created_at', '<=', $formData['to'])
+                    ->whereDate('histories.created_at', '>=', $from)
+                    ->whereDate('histories.created_at', '<=', $to)
                     ->select('histories.*',
                             'officers.name as officer_name',
                             'visitors.name as visitor_name',
                             'visitors.designation as designation',
                             'visitors.phone as phone')
                     ->orderByDesc('histories.created_at')
-                    ->paginate(10);;
-        return view('visitor.list', ['people' => $visits]);
+                    ->paginate(10);
+        return view('visitor.paged_report', ['visits' => $visits]);
     }
 }

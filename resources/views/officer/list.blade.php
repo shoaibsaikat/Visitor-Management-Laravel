@@ -16,7 +16,7 @@
                     <tr>
                         <td class="px-6 py-4 whitespace-no-wrap">{{ $info->name }}</td>
                         <td class="px-6 py-4 whitespace-no-wrap">{{ $info->designation }}</td>
-                        <td class="px-6 py-4 whitespace-no-wrap">{{ $info->phone }}</td>
+                        <td class="px-6 py-4 whitespace-no-wrap">0{{ $info->phone }}</td>
                         <td class="px-6 py-4 ">
                             <a href="{{route('officer.edit', ['person' => $info])}}" class="text-indigo-400 hover:text-indigo-600">Edit</a>
                         </td>

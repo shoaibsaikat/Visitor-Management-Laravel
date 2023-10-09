@@ -33,19 +33,19 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 // Officer
-Route::get('/officer', [OfficerController::class, 'list'])->name('officer.list');
-Route::get('/officer/create', [OfficerController::class, 'create'])->name('officer.create');
-Route::post('/officer/store', [OfficerController::class, 'store'])->name('officer.store');
-Route::get('/officer/{person}/edit', [OfficerController::class, 'edit'])->name('officer.edit');
-Route::put('/officer/{person}/update', [OfficerController::class, 'update'])->name('officer.update');
+Route::get('/officer', [OfficerController::class, 'list'])->name('officer.list')->middleware('auth');
+Route::get('/officer/create', [OfficerController::class, 'create'])->name('officer.create')->middleware('auth');
+Route::post('/officer/store', [OfficerController::class, 'store'])->name('officer.store')->middleware('auth');
+Route::get('/officer/{person}/edit', [OfficerController::class, 'edit'])->name('officer.edit')->middleware('auth');
+Route::put('/officer/{person}/update', [OfficerController::class, 'update'])->name('officer.update')->middleware('auth');
 
 // Visitor
-Route::get('/visitor', [VisitorController::class, 'list'])->name('visitor.list');
-Route::get('/visitor/create', [VisitorController::class, 'create'])->name('visitor.create');
-Route::post('/visitor/store', [VisitorController::class, 'store'])->name('visitor.store');
-Route::post('/visitor/search', [VisitorController::class, 'search'])->name('visitor.search');
+Route::get('/visitor', [VisitorController::class, 'list'])->name('visitor.list')->middleware('auth');
+Route::get('/visitor/create', [VisitorController::class, 'create'])->name('visitor.create')->middleware('auth');
+Route::post('/visitor/store', [VisitorController::class, 'store'])->name('visitor.store')->middleware('auth');
+Route::post('/visitor/search', [VisitorController::class, 'search'])->name('visitor.search')->middleware('auth');
 Route::get('/visitor/report', function() {
     return view('visitor.report');
-})->name('visitor.report');
-Route::post('/visitor/report', [VisitorController::class, 'report'])->name('visitor.report');
-Route::get('/visitor/paged_report/{from}/{to}', [VisitorController::class, 'paged_report'])->name('visitor.paged_report');
+})->name('visitor.report')->middleware('auth');
+Route::post('/visitor/report', [VisitorController::class, 'report'])->name('visitor.report')->middleware('auth');
+Route::get('/visitor/paged_report/{from}/{to}', [VisitorController::class, 'paged_report'])->name('visitor.paged_report')->middleware('auth');

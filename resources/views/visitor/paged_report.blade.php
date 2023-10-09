@@ -19,7 +19,7 @@
                         <td class="px-6 py-4 whitespace-no-wrap">{{ $info->visitor_name }}</td>
                         <td class="px-6 py-4 whitespace-no-wrap">{{ $info->officer_name }}</td>
                         <td class="px-6 py-4 whitespace-no-wrap">{{ $info->designation }}</td>
-                        <td class="px-6 py-4 whitespace-no-wrap">{{ $info->phone }}</td>
+                        <td class="px-6 py-4 whitespace-no-wrap">0{{ $info->phone }}</td>
                         <td class="px-6 py-4 whitespace-no-wrap">{{ $info->card_no }}</td>
                         <td class="px-6 py-4 whitespace-no-wrap">{{ $info->created_at }}</td>
                     </tr>

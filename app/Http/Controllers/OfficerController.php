@@ -8,7 +8,7 @@ use App\Models\People;
 class OfficerController extends Controller
 {
     public function list() {
-        $officer = People::where('type', 0)->orderByDesc('designation')->get();
+        $officer = People::where('type', 0)->orderByDesc('designation')->paginate(10);
         return view('officer.list', ['people' => $officer]);
     }
 

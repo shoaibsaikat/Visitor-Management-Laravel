@@ -4,7 +4,7 @@
 @stop
 @section('content')
     <div class="container mx-auto mt-8 text-white">
-        <div class="max-w-md mx-auto bg-gray-800 p-6 rounded-md shadow-md">
+        <div class="max-w-md mx-auto bg-gray-900 p-6 rounded-lg shadow-lg">
             <h2 class="text-xl font-semibold mb-4">Select Report Interval</h2>
             <form method="POST" action="{{route('visitor.report')}}">
                 @csrf

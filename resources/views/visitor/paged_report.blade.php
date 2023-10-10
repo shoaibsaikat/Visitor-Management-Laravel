@@ -23,7 +23,7 @@
                         <td class="px-1 py-2 whitespace-no-wrap">{{ $info->designation }}</td>
                         <td class="px-1 py-2 whitespace-no-wrap">0{{ $info->phone }}</td>
                         <td class="px-1 py-2 whitespace-no-wrap">{{ $info->card_no }}</td>
-                        <td class="px-1 py-2 whitespace-no-wrap">{{ $info->created_at }}</td>
+                        <td class="px-1 py-2 whitespace-no-wrap">{{ date('Y-m-d', strtotime($info->created_at)) }}</td>
                     </tr>
                 @endforeach
             </tbody>

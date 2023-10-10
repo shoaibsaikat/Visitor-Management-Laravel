@@ -6,7 +6,16 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('Home') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('officer.list')" :active="request()->routeIs('officer.list')">
+                        {{ __('Officer') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('visitor.list')" :active="request()->routeIs('visitor.list')">
+                        {{ __('Visitor') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('visitor.report')" :active="request()->routeIs('visitor.report')">
+                        {{ __('Visit Report') }}
                     </x-nav-link>
                 </div>
             </div>

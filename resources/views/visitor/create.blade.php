@@ -1,4 +1,7 @@
 @extends('layouts.master')
+@section('header')
+    <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Create Visit</h2>
+@stop
 @section('content')
     <div>
         <form action="{{route('visitor.search')}}" method="POST">
@@ -45,7 +48,7 @@
                 <input type="text" id="nid" name="nid" pattern="[0-9]{10}" class="w-full border rounded-md px-3 py-2 text-gray-700" value="{{$visitor['nid']}}">
             </div>
             <div class="mt-4">
-                <label for="officers" class="block text-white font-bold">Select an Item:</label>
+                <label for="officers" class="block text-white font-bold">Select visiting officer:</label>
                 <select id="officers" name="officer" class="block w-full rounded-md py-2 px-3 mt-1 text-gray-700">
                     @foreach ($officers as $item)
                         <option value="{{$item->id}}">{{$item->name}}</option>

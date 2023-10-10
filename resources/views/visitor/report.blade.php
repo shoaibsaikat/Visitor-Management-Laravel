@@ -1,8 +1,11 @@
 @extends('layouts.master')
+@section('header')
+    <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Visit Report Selection</h2>
+@stop
 @section('content')
     <div class="container mx-auto mt-8 text-white">
         <div class="max-w-md mx-auto bg-gray-800 p-6 rounded-md shadow-md">
-            <h1 class="text-2xl font-semibold mb-4">Select Report Interval</h1>
+            <h2 class="text-xl font-semibold mb-4">Select Report Interval</h2>
             <form method="POST" action="{{route('visitor.report')}}">
                 @csrf
                 <div class="mb-4">

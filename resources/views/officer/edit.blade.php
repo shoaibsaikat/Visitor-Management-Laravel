@@ -1,6 +1,8 @@
 @extends('layouts.master')
+@section('header')
+    <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Update Information</h2>
+@stop
 @section('content')
-    <h1 class="text-2xl font-semibold mb-6 text-white">Officer Information Update</h1>
     <form action="{{route('officer.update', ['person' => $person])}}" method="post">
         @csrf
         @method('put')

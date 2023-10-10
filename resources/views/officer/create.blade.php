@@ -1,6 +1,8 @@
 @extends('layouts.master')
+@section('header')
+    <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Officer Form</h2>
+@stop
 @section('content')
-    <h1 class="text-2xl font-semibold mb-6 text-white">Officer Information Form</h1>
     <form action="{{route('officer.store')}}" method="post">
         @csrf
         <div class="mb-4">

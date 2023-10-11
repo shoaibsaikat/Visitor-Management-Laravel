@@ -86,6 +86,9 @@ class VisitorController extends Controller
     }
 
     public function store(Request $request) {
+        if ($request->user()->cannot('modify', VisitorHistory::class)) {
+            abort(403);
+        }
         $formData = $request->validate([
             'name'          => 'required|string|max:255',
             'designation'   => 'required|string|max:255',

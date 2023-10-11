@@ -52,4 +52,17 @@ class OfficerController extends Controller
         $person->update($formData);
         return redirect(route('officer.list'))->with('success', 'Officer information updated!');
     }
+
+    public function name_search() {
+        $formData = request()->validate([
+            'name' => 'required',
+        ]);
+        $officer = People::where([['name', $formData['name']], ['type', 0]])->paginate(10);        
+        if (is_null($officer)) {
+            // TODO: show error message
+            return redirect(route('officer.list'));
+        } else {
+            return view('officer.list', ['people' => $officer]);
+        }
+    }
 }

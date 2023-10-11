@@ -4,7 +4,7 @@
 @stop
 @section('content')
     <div>
-        <form action="{{route('visitor.search')}}" method="POST">
+        <form action="{{route('visitor.phone_search')}}" method="POST">
             @csrf
             <div class="flex flex-row">
                 <div class="mb-4">

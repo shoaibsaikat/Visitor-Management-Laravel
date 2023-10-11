@@ -36,6 +36,7 @@ require __DIR__.'/auth.php';
 Route::get('/officer', [OfficerController::class, 'list'])->name('officer.list')->middleware('auth');
 Route::get('/officer/create', [OfficerController::class, 'create'])->name('officer.create')->middleware('auth');
 Route::post('/officer/store', [OfficerController::class, 'store'])->name('officer.store')->middleware('auth');
+Route::post('/officer/name_search', [OfficerController::class, 'name_search'])->name('officer.name_search')->middleware('auth');
 Route::get('/officer/{person}/edit', [OfficerController::class, 'edit'])->name('officer.edit')->middleware('auth');
 Route::put('/officer/{person}/update', [OfficerController::class, 'update'])->name('officer.update')->middleware('auth');
 
@@ -43,7 +44,8 @@ Route::put('/officer/{person}/update', [OfficerController::class, 'update'])->na
 Route::get('/visitor', [VisitorController::class, 'list'])->name('visitor.list')->middleware('auth');
 Route::get('/visitor/create', [VisitorController::class, 'create'])->name('visitor.create')->middleware('auth');
 Route::post('/visitor/store', [VisitorController::class, 'store'])->name('visitor.store')->middleware('auth');
-Route::post('/visitor/search', [VisitorController::class, 'search'])->name('visitor.search')->middleware('auth');
+Route::post('/visitor/phone_search', [VisitorController::class, 'phone_search'])->name('visitor.phone_search')->middleware('auth');
+Route::post('/visitor/name_search', [VisitorController::class, 'name_search'])->name('visitor.name_search')->middleware('auth');
 Route::get('/visitor/report', function() {
     return view('visitor.report');
 })->name('visitor.report')->middleware('auth');

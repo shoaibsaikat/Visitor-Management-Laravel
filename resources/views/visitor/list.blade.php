@@ -3,11 +3,21 @@
     <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Visit List</h2>
 @stop
 @section('content')
-    <div class="mt-6">
+    <div class="mt-6 float-left">
         <a href="{{route('visitor.create')}}" class="bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-white hover:text-gray-700">Add Visit</a>
     </div>
-    <br>
+    <div class="mt-6 float-right">
+        <form method="POST" action="{{route('visitor.name_search')}}">
+            @csrf
+            <div class="flex flex-row">
+                <input type="text" id="name" name="name" placeholder="Visitor name" class="w-full border rounded-md px-3 py-2 text-gray-700" required>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="submit" class="bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-white hover:text-gray-700">Search</button>
+            </div>
+        </form>
+    </div>
     <div class="container mx-auto text-white">
+        <br><br><br><br>
         <table class="min-w-full divide-y divide-gray-600">
             <thead>
                 <tr>

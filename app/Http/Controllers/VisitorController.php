@@ -40,7 +40,8 @@ class VisitorController extends Controller
         return view('visitor.create', ['officers' => $officers, 'visitor' => $visitor]);
     }
 
-    public function search() {
+    public function phone_search() {
+        // TOOD: add error message if phone number matches with officer
         $formData = request()->validate([
             'phone' => 'required|regex:/^[0-9]{10}$/',
         ]);
@@ -57,6 +58,31 @@ class VisitorController extends Controller
         }
         $officers = People::where('type', 0)->orderBy('designation')->get();
         return view('visitor.create', ['officers' => $officers, 'visitor' => $visitor]);
+    }
+
+    public function name_search() {
+        $formData = request()->validate([
+            'name' => 'required',
+        ]);
+        $visitor = People::where([['name', $formData['name']], ['type', 1]])->first();        
+        if (is_null($visitor)) {
+            // TODO: show error message
+            return view(route('visitor.list'));
+        } else {
+            $visits = DB::table('visitor_histories as histories')
+                    ->join('people as officers', 'officers.id', '=', 'histories.officer_id')
+                    ->join('people as visitors', 'visitors.id', '=', 'histories.visitor_id')
+                    ->select('histories.*',
+                            'officers.name as officer_name',
+                            'visitors.name as visitor_name',
+                            'visitors.designation as designation',
+                            'visitors.phone as phone')
+                    ->where('visitor_id', $visitor->id)
+                    ->orderBy('histories.id')
+                    ->orderByDesc('histories.created_at')
+                    ->paginate(10);
+            return view('visitor.list', ['visits' => $visits]);
+        }
     }
 
     public function store(Request $request) {

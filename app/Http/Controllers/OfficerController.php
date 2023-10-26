@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\People;
+use App\Models\User;
 
 class OfficerController extends Controller
 {
@@ -13,7 +14,8 @@ class OfficerController extends Controller
     }
 
     public function create() {
-        return view('officer.create');
+        $users = User::all();
+        return view('officer.create', ['users' => $users]);
     }
 
     public function store(Request $request) {
@@ -25,10 +27,11 @@ class OfficerController extends Controller
             'designation'   => 'required|string|max:255',
             'address'       => 'required|string',
             'phone'         => 'required|regex:/^[0-9]{10}$/',
+            'email'         => 'nullable', // TODO: check if length 10 enough to contain pkey
             'nid'           => 'nullable|regex:/^[0-9]{10}$/',
         ]);
 
-        People::create([
+        $person = People::create([
             'name'          => $formData['name'],
             'designation'   => $formData['designation'],
             'address'       => $formData['address'],
@@ -36,11 +39,17 @@ class OfficerController extends Controller
             'nid'           => $formData['nid'],
             'type'          => 0,
         ]);
+        $user = User::find($formData['email']);
+        if ($user != null) {
+            $user->officer_id = $person->id;
+            $user->update();
+        }
         return redirect(route('welcome'))->with('success', 'Officer created!');
     }
 
     public function edit(People $person) {
-        return view('officer.edit', ['person' => $person]);
+        $users = User::all();
+        return view('officer.edit', ['person' => $person, 'users' => $users]);
     }
 
     public function update(Request $request, People $person) {
@@ -52,9 +61,15 @@ class OfficerController extends Controller
             'designation'   => 'required|string|max:255',
             'address'       => 'required|string',
             'phone'         => 'required|regex:/^[0-9]{10}$/',
+            'email'         => 'nullable', // TODO: check if length 10 enough to contain pkey
             'nid'           => 'nullable|regex:/^[0-9]{10}$/',
         ]);
 
+        $user = User::find($formData['email']);
+        if ($user != null) {
+            $user->officer_id = $person->id;
+            $user->update();
+        }
         $person->update($formData);
         return redirect(route('officer.list'))->with('success', 'Officer information updated!');
     }

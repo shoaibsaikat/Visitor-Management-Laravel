@@ -21,6 +21,14 @@
             <label for="phone" class="block text-white font-bold">Phone: (10 characters)</label>
             <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" class="w-full border rounded-md px-3 py-2 text-gray-700" required>
         </div>
+        <div class="mt-4 pb-4">
+            <label for="emails" class="block text-white font-bold">Select email address:</label>
+            <select id="emails" name="email" class="w-full border rounded-md px-3 py-2 text-gray-700">
+                @foreach ($users as $item)
+                    <option value="{{$item->id}}">{{$item->email}}</option>
+                @endforeach
+            </select>
+        </div>
         <div class="mb-4">
             <label for="nid" class="block text-white font-bold">NID: (10 characters)</label>
             <input type="text" id="nid" name="nid" pattern="[0-9]{10}" class="w-full border rounded-md px-3 py-2 text-gray-700">

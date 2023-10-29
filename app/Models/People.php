@@ -16,5 +16,6 @@ class People extends Model
         'type',
         'phone',
         'nid',
+        'user_id',
     ];
 }

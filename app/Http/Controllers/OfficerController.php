@@ -43,6 +43,8 @@ class OfficerController extends Controller
         if ($user != null && !isset($user->officer_id)) {
             $user->officer_id = $person->id;
             $user->update();
+            $person->user_id = $user->id;
+            $person->update();
         }
         return redirect(route('welcome'))->with('success', 'Officer created!');
     }
@@ -69,6 +71,7 @@ class OfficerController extends Controller
         if ($user != null && !isset($user->officer_id)) {
             $user->officer_id = $person->id;
             $user->update();
+            $formData['user_id'] = $user->id;
         }
         $person->update($formData);
         return redirect(route('officer.list'))->with('success', 'Officer information updated!');

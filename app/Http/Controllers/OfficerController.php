@@ -40,7 +40,7 @@ class OfficerController extends Controller
             'type'          => 0,
         ]);
         $user = User::find($formData['email']);
-        if ($user != null) {
+        if ($user != null && !isset($user->officer_id)) {
             $user->officer_id = $person->id;
             $user->update();
         }
@@ -66,7 +66,7 @@ class OfficerController extends Controller
         ]);
 
         $user = User::find($formData['email']);
-        if ($user != null) {
+        if ($user != null && !isset($user->officer_id)) {
             $user->officer_id = $person->id;
             $user->update();
         }

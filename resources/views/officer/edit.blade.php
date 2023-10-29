@@ -27,7 +27,11 @@
             <select id="emails" name="email" class="w-full border rounded-md px-3 py-2 text-gray-700">
                 <option value="0">Select an email:</option>
                 @foreach ($users as $item)
-                    <option value="{{$item->id}}">{{$item->email}}</option>
+                    @if ($item->officer_id == $person->id)
+                        <option value="{{$item->id}}" selected>{{$item->email}}</option>
+                    @else
+                        <option value="{{$item->id}}">{{$item->email}}</option>
+                    @endif
                 @endforeach
             </select>
         </div>

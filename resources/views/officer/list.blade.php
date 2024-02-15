@@ -34,7 +34,7 @@
                         <td class="px-1 py-2 whitespace-no-wrap">{{ $info->designation }}</td>
                         <td class="px-1 py-2 whitespace-no-wrap">0{{ $info->phone }}</td>
                         <td class="px-1 py-2 ">
-                            <a href="{{route('officer.edit', ['person' => $info])}}" class="text-indigo-400 hover:text-indigo-600">Edit</a>
+                            <a href="{{route('officer.edit', ['person' => $info->id])}}" class="text-indigo-400 hover:text-indigo-600">Edit</a>
                         </td>
                     </tr>
                 @endforeach

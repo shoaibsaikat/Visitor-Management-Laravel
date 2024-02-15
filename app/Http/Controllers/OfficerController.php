@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\People;
 use App\Models\User;
@@ -81,7 +82,7 @@ class OfficerController extends Controller
         $formData = request()->validate([
             'name' => 'required',
         ]);
-        $officer = People::where([['name', $formData['name']], ['type', 0]])->paginate(10);        
+        $officer = DB::table('people')->where('name', 'like', '%' . $formData['name'] . '%')->paginate(10);
         if (is_null($officer)) {
             // TODO: show error message
             return redirect(route('officer.list'));
@@ -90,3 +91,12 @@ class OfficerController extends Controller
         }
     }
 }
+
+/*
+    NOTE: to show DB query generated use below
+    DB::enableQueryLog(); // Enable query log
+
+    // Your Eloquent query executed by using get()
+
+    dd(DB::getQueryLog()); // Show results of log
+*/

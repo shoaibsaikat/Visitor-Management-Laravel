@@ -41,7 +41,7 @@ class VisitorController extends Controller
     }
 
     public function phone_search() {
-        // TOOD: add error message if phone number matches with officer
+        // TODO: add error message if phone number matches with officer
         $formData = request()->validate([
             'phone' => 'required|regex:/^[0-9]{10}$/',
         ]);
@@ -64,10 +64,10 @@ class VisitorController extends Controller
         $formData = request()->validate([
             'name' => 'required',
         ]);
-        $visitor = People::where([['name', $formData['name']], ['type', 1]])->first();        
+        // it's extact matched to show visit history of a certain user
+        $visitor = People::where([['name', $formData['name']], ['type', 1]])->first();
         if (is_null($visitor)) {
-            // TODO: show error message
-            return view(route('visitor.list'));
+            return view('visitor.list', ['visits' => null]);
         } else {
             $visits = DB::table('visitor_histories as histories')
                     ->join('people as officers', 'officers.id', '=', 'histories.officer_id')

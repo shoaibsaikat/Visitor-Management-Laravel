@@ -82,10 +82,11 @@ class OfficerController extends Controller
         $formData = request()->validate([
             'name' => 'required',
         ]);
-        $officer = DB::table('people')->where('name', 'like', '%' . $formData['name'] . '%')->paginate(10);
-        if (is_null($officer)) {
-            // TODO: show error message
-            return redirect(route('officer.list'));
+        $officer = DB::table('people')
+                    ->where('name', 'like', '%' . $formData['name'] . '%')
+                    ->where('type', '=', 0)->paginate(10);
+        if ($officer->isEmpty()) {
+            return view('officer.list', ['people' => null]);
         } else {
             return view('officer.list', ['people' => $officer]);
         }

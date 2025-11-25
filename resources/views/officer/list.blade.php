@@ -42,7 +42,7 @@
                 </tbody>
             </table>
             <br>
-            {{ $people->links(); }}
+            {{ $people->links() }}
         @else
             <h1>No such officer found!</h1>
         @endif

@@ -21,5 +21,5 @@ A Visitor Management System made with Laravel
 
 # Note
 1. pattern used for passowrd is for example for user, "<user>@dev.com" is "<user>@2023". users are availble in users table
-2. for laravel installation for the first time you can follow, "https://laravel.com/docs/7.x/installation"
+2. for laravel installation for the first time you can follow, "https://laravel.com/docs/"
 

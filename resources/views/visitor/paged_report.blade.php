@@ -29,6 +29,6 @@
             </tbody>
         </table>
         <br>
-        {{ $visits->links(); }}
+        {{ $visits->links() }}
     </div>
 @stop

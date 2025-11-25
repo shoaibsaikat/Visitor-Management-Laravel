@@ -40,11 +40,11 @@
                             <td class="px-1 py-2 whitespace-no-wrap">{{ $info->card_no }}</td>
                             <td class="px-1 py-2 whitespace-no-wrap">{{ date('Y-m-d', strtotime($info->created_at)) }}</td>
                         </tr>
-                    @endforeach 
+                    @endforeach
                 </tbody>
             </table>
             <br>
-            {{ $visits->links(); }}
+            {{ $visits->links() }}
         @else
             <h1>No such visitor found!</h1>
         @endif

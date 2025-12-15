@@ -17,9 +17,6 @@
                     <x-nav-link :href="route('visitor.report')" :active="request()->routeIs('visitor.report')">
                         {{ __('Visit Report') }}
                     </x-nav-link>
-                    <x-nav-link href="#">
-                        {{ __('Leave') }}
-                    </x-nav-link>
                 </div>
             </div>
 

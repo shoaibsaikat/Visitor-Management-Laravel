@@ -28,25 +28,25 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 // Officer
-Route::middleware(['auth'])->controller(OfficerController::class)->prefix('officer')
+Route::middleware(['auth'])->controller(OfficerController::class)->prefix('officer')->name('officer.')
 ->group(function () {
-    Route::get('/', 'list')->name('officer.list');
-    Route::get('/create', 'create')->name('officer.create');
-    Route::post('/store', 'store')->name('officer.store');
-    Route::post('/name_search', 'name_search')->name('officer.name_search');
-    Route::get('/{person}/edit', 'edit')->name('officer.edit');
-    Route::put('/{person}/update', 'update')->name('officer.update');
+    Route::get('/', 'list')->name('list');
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::post('/name_search', 'name_search')->name('name_search');
+    Route::get('/{person}/edit', 'edit')->name('edit');
+    Route::put('/{person}/update', 'update')->name('update');
 });
 
 // Visitor
-Route::middleware(['auth'])->controller(VisitorController::class)->prefix('visitor')
+Route::middleware(['auth'])->controller(VisitorController::class)->prefix('visitor')->name('visitor.')
 ->group(function () {
-    Route::get('/', 'list')->name('visitor.list');
-    Route::get('/create', 'create')->name('visitor.create');
-    Route::post('/store', 'store')->name('visitor.store');
-    Route::post('/phone_search', 'phone_search')->name('visitor.phone_search');
-    Route::post('/name_search', 'name_search')->name('visitor.name_search');
-    Route::post('/report', 'report')->name('visitor.report');
-    Route::view('/report', 'visitor.report')->name('visitor.report');
-    Route::get('/paged_report/{from}/{to}', 'paged_report')->name('visitor.paged_report');
+    Route::get('/', 'list')->name('list');
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::post('/phone_search', 'phone_search')->name('phone_search');
+    Route::post('/name_search', 'name_search')->name('name_search');
+    Route::post('/report', 'report')->name('report');
+    Route::view('/report', 'visitor.report')->name('report');
+    Route::get('/paged_report/{from}/{to}', 'paged_report')->name('paged_report');
 });

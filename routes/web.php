@@ -16,13 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::view('/', 'welcome')->name('welcome');
+Route::view('/dashboard', 'dashboard')->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -33,21 +28,25 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 // Officer
-Route::get('/officer', [OfficerController::class, 'list'])->name('officer.list')->middleware('auth');
-Route::get('/officer/create', [OfficerController::class, 'create'])->name('officer.create')->middleware('auth');
-Route::post('/officer/store', [OfficerController::class, 'store'])->name('officer.store')->middleware('auth');
-Route::post('/officer/name_search', [OfficerController::class, 'name_search'])->name('officer.name_search')->middleware('auth');
-Route::get('/officer/{person}/edit', [OfficerController::class, 'edit'])->name('officer.edit')->middleware('auth');
-Route::put('/officer/{person}/update', [OfficerController::class, 'update'])->name('officer.update')->middleware('auth');
+Route::middleware(['auth'])->controller(OfficerController::class)->prefix('officer')
+->group(function () {
+    Route::get('/', 'list')->name('officer.list');
+    Route::get('/create', 'create')->name('officer.create');
+    Route::post('/store', 'store')->name('officer.store');
+    Route::post('/name_search', 'name_search')->name('officer.name_search');
+    Route::get('/{person}/edit', 'edit')->name('officer.edit');
+    Route::put('/{person}/update', 'update')->name('officer.update');
+});
 
 // Visitor
-Route::get('/visitor', [VisitorController::class, 'list'])->name('visitor.list')->middleware('auth');
-Route::get('/visitor/create', [VisitorController::class, 'create'])->name('visitor.create')->middleware('auth');
-Route::post('/visitor/store', [VisitorController::class, 'store'])->name('visitor.store')->middleware('auth');
-Route::post('/visitor/phone_search', [VisitorController::class, 'phone_search'])->name('visitor.phone_search')->middleware('auth');
-Route::post('/visitor/name_search', [VisitorController::class, 'name_search'])->name('visitor.name_search')->middleware('auth');
-Route::get('/visitor/report', function() {
-    return view('visitor.report');
-})->name('visitor.report')->middleware('auth');
-Route::post('/visitor/report', [VisitorController::class, 'report'])->name('visitor.report')->middleware('auth');
-Route::get('/visitor/paged_report/{from}/{to}', [VisitorController::class, 'paged_report'])->name('visitor.paged_report')->middleware('auth');
+Route::middleware(['auth'])->controller(VisitorController::class)->prefix('visitor')
+->group(function () {
+    Route::get('/', 'list')->name('visitor.list');
+    Route::get('/create', 'create')->name('visitor.create');
+    Route::post('/store', 'store')->name('visitor.store');
+    Route::post('/phone_search', 'phone_search')->name('visitor.phone_search');
+    Route::post('/name_search', 'name_search')->name('visitor.name_search');
+    Route::post('/report', 'report')->name('visitor.report');
+    Route::view('/report', 'visitor.report')->name('visitor.report');
+    Route::get('/paged_report/{from}/{to}', 'paged_report')->name('visitor.paged_report');
+});

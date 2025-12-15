@@ -3,7 +3,7 @@
     <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Officer Form</h2>
 @stop
 @section('content')
-    <form action="{{route('officer.store')}}" method="post">
+    <form action="{{ route('officer.store') }}" method="post">
         @csrf
         <div class="mb-4">
             <label for="name" class="block text-white font-bold">Name:</label>
@@ -27,7 +27,7 @@
                 <option value="0">Select an email:</option>
                 @foreach ($users as $item)
                     @if (!isset($item->officer_id))
-                        <option value="{{$item->id}}">{{$item->email}}</option>
+                        <option value="{{ $item->id }}">{{ $item->email }}</option>
                     @endif
                 @endforeach
             </select>
@@ -42,7 +42,7 @@
         @if ($errors->any())
             <ul>
                 @foreach ($errors->all() as $error)
-                    <li class="text-red-500">{{$error}}</li>
+                    <li class="text-red-500">{{ $error }}</li>
                 @endforeach
             </ul>
         @endif

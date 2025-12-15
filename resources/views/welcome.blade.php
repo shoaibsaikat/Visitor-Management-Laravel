@@ -14,6 +14,6 @@
         @endif
     </div>
     @if (session()->has('success'))
-        <div class="text-white">{{session('success')}}</div>
+        <div class="text-white">{{ session('success') }}</div>
     @endif
 </x-guest-layout>

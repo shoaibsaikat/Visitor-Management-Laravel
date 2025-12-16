@@ -16,7 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'welcome')->name('welcome');
+Route::get('/', function() {
+    if (auth()->check()) {
+        return redirect('visitor');
+    } else {
+        return view('welcome');
+    }
+})->name('welcome');
 Route::get('/dashboard', function() {
     return redirect('visitor');
 })->middleware('auth')->name('dashboard');

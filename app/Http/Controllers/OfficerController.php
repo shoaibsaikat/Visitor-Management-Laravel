@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\People;
 use App\Models\User;
 
+use Illuminate\Support\Facades\Log;
+
 class OfficerController extends Controller
 {
     public function list() {
@@ -68,11 +70,18 @@ class OfficerController extends Controller
             'nid'           => 'nullable|regex:/^[0-9]{10}$/',
         ]);
 
-        $user = User::find($formData['email']);
+        $user = User::find($formData['email']); // $formData['email'] is actually the id of the user
         if ($user != null && !isset($user->officer_id)) {
             $user->officer_id = $person->id;
             $user->update();
             $formData['user_id'] = $user->id;
+        } else if ($user == null) {
+            $user = User::find($person->user_id);
+            if ($user != null) {
+                $user->officer_id = null;
+                $user->update();
+                $formData['user_id'] = null;
+            }
         }
         $person->update($formData);
         return redirect(route('officer.list'))->with('success', 'Officer information updated!');

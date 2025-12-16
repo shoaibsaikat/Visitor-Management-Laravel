@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\OfficerController;
 use App\Http\Controllers\VisitorController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function() {
-    if (auth()->check()) {
+    if (Auth::check()) {
         return redirect('visitor');
     } else {
         return view('welcome');

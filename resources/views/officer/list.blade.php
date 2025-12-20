@@ -4,7 +4,10 @@
 @stop
 @section('content')
     <div class="mt-6 float-left">
-        <a href="{{ route('officer.create') }}" class="bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-white hover:text-gray-700">Add Officer</a>
+        <a href="{{ Auth::user()->can_manage_people ? route('officer.create') : '#' }}"
+            class="bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-white hover:text-gray-700 {{ Auth::user()->can_manage_people ?  '' : 'pointer-events-none' }}">
+            Add Officer
+        </a>
     </div>
     <div class="mt-6 float-right">
         <form method="POST" action="{{ route('officer.name_search') }}">

@@ -4,7 +4,9 @@
 @stop
 @section('content')
     <div class="mt-6 float-left">
-        <a href="{{route('visitor.create')}}" class="bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-white hover:text-gray-700">Add Visit</a>
+        <a href="{{ Auth::user()->can_manage_people ? route('visitor.create') : '#' }}"
+            class="bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-white hover:text-gray-700 {{ Auth::user()->can_manage_people ? '' : 'pointer-events-none' }}">
+            Add Visit</a>
     </div>
     <div class="mt-6 float-right">
         <form method="POST" action="{{route('visitor.name_search')}}">

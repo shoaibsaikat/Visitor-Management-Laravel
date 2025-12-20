@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 16, 2025 at 08:43 AM
+-- Generation Time: Dec 20, 2025 at 10:38 AM
 -- Server version: 12.1.2-MariaDB
--- PHP Version: 8.5.0
+-- PHP Version: 8.5.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -106,10 +106,10 @@ CREATE TABLE `people` (
 --
 
 INSERT INTO `people` (`id`, `created_at`, `updated_at`, `name`, `designation`, `address`, `phone`, `nid`, `type`, `user_id`) VALUES
-(1, '2023-10-02 02:53:29', '2025-12-16 02:39:39', 'Rahman Subhan', 'Director', 'Agargaon', '1985648907', NULL, 0, 5),
-(2, '2023-10-02 02:55:19', '2023-10-11 04:18:52', 'Rahim Didar', 'Director', 'Agargaon', '1567487705', NULL, 0, NULL),
+(1, '2023-10-02 02:53:29', '2025-12-16 04:20:56', 'Rahman Subhan', 'Director', 'Agargaon', '1985648907', NULL, 0, NULL),
+(2, '2023-10-02 02:55:19', '2025-12-16 04:21:04', 'Rahim Didar', 'Director', 'Agargaon', '1567487705', NULL, 0, NULL),
 (3, '2023-10-02 04:20:40', '2023-10-10 03:23:54', 'Hakimuzzaman Khan', 'Deputy Director', 'Agargaon', '3675484568', NULL, 0, NULL),
-(4, '2023-10-02 22:43:11', '2023-10-08 02:40:52', 'Abdul Hamid', 'Deputy Director', 'Agargaon', '1234567891', NULL, 0, NULL),
+(4, '2023-10-02 22:43:11', '2025-12-20 03:45:18', 'Abdul Hamid', 'Deputy Director', 'Agargaon', '1234567891', NULL, 0, NULL),
 (19, '2023-10-04 04:09:20', '2023-10-04 04:09:20', 'Tipu', 'Pion', 'Kawran Bazar', '5674389219', NULL, 1, NULL),
 (21, '2023-10-05 02:19:31', '2023-10-05 02:19:31', 'Karim Molla', 'Delivery Man', 'Mirpur', '4658739876', NULL, 1, NULL),
 (22, '2023-10-08 02:36:22', '2023-10-08 02:36:22', 'Monir Khan', 'Delivery Man', 'Mirpur', '3567589487', NULL, 1, NULL),
@@ -122,7 +122,9 @@ INSERT INTO `people` (`id`, `created_at`, `updated_at`, `name`, `designation`, `
 (29, '2023-10-08 04:26:08', '2023-10-08 04:26:08', 'Abdul Jabbar', 'Consultant', 'Mirpur', '5889765465', NULL, 1, NULL),
 (30, '2023-10-08 04:27:52', '2023-10-08 04:27:52', 'Mustafa Jabbar', 'Minister', 'Mirpur', '5643675890', NULL, 1, NULL),
 (31, '2023-10-08 04:28:42', '2023-10-08 04:28:42', 'Mahmuda Khanam', 'Banker', 'Motijheel', '3423567567', NULL, 1, NULL),
-(32, '2023-10-11 03:26:56', '2023-10-11 03:30:31', 'Hasna Hena', 'Deputy Director', 'Azimpur', '5664341768', NULL, 0, NULL);
+(32, '2023-10-11 03:26:56', '2023-10-11 03:30:31', 'Hasna Hena', 'Deputy Director', 'Azimpur', '5664341768', NULL, 0, NULL),
+(33, '2025-12-20 03:57:31', '2025-12-20 03:57:31', 'Shoaib Roshan', 'System Analyst', 'Fatulla, Narayanganj', '1733849568', NULL, 0, NULL),
+(34, '2025-12-20 03:59:45', '2025-12-20 03:59:45', 'Tarik Asad', 'Deputy Director', 'Chashara, Narayanganj', '1844738693', NULL, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -167,8 +169,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `can_manage_people`, `officer_id`) VALUES
-(4, 'Developer', 'dev@dev.com', NULL, '$2y$10$ufzU5kYZg4deqvh6SyRf8.gPEzQ3BjwgzQkO8TpmxGXWNz5X0C2YW', 'wm7cp7ChGOhyLDD07it2BMW3n3p6lFR42GiaRvtK9Aq6BLWQYTfLAYJRmMAM', '2023-10-11 02:20:59', '2023-10-11 02:20:59', 1, NULL),
-(5, 'Guest', 'guest@dev.com', NULL, '$2y$10$Y3rz9hQzs/Gs8LekEzc0Q./bQd5/I7FzHZbhk2.Znyy5ySP9venlO', NULL, '2023-10-11 03:28:13', '2025-12-16 02:39:39', 0, 1);
+(4, 'Developer', 'dev@dev.com', NULL, '$2y$10$ufzU5kYZg4deqvh6SyRf8.gPEzQ3BjwgzQkO8TpmxGXWNz5X0C2YW', 'CdSjVaF0ux2NEOrynrm9PpFe8OkkpMsfONY5naCwVfu2ltuVfa9WyiAavzjB', '2023-10-11 02:20:59', '2025-12-16 04:21:04', 1, NULL),
+(5, 'Guest', 'guest@dev.com', NULL, '$2y$10$Y3rz9hQzs/Gs8LekEzc0Q./bQd5/I7FzHZbhk2.Znyy5ySP9venlO', NULL, '2023-10-11 03:28:13', '2025-12-16 04:20:56', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -284,7 +286,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `people`
 --
 ALTER TABLE `people`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`

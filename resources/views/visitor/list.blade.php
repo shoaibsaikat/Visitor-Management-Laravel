@@ -3,18 +3,21 @@
     <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Visit List</h2>
 @stop
 @section('content')
-    <div class="mt-6 float-left">
-        <a href="{{ Auth::user()->can_manage_people ? route('visitor.create') : '#' }}"
-            class="bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-white hover:text-gray-700 {{ Auth::user()->can_manage_people ? '' : 'pointer-events-none' }}">
-            Add Visit</a>
-    </div>
+    @can('modify', App\Models\People::class)
+        <div class="mt-6 float-left">
+            <a href="{{ route('visitor.create') }}"
+                class="bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-white hover:text-gray-700">Add Visit</a>
+        </div>
+    @endcan
     <div class="mt-6 float-right">
-        <form method="POST" action="{{route('visitor.name_search')}}">
+        <form method="POST" action="{{ route('visitor.name_search') }}">
             @csrf
             <div class="flex flex-row">
-                <input type="text" id="name" name="name" placeholder="Visitor full name" class="w-full border rounded-md px-3 py-2 text-gray-700" required>
+                <input type="text" id="name" name="name" placeholder="Visitor full name"
+                    class="w-full border rounded-md px-3 py-2 text-gray-700" required>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <button type="submit" class="bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-white hover:text-gray-700">Search</button>
+                <button type="submit"
+                    class="bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-white hover:text-gray-700">Search</button>
             </div>
         </form>
     </div>

@@ -11,17 +11,20 @@ use Illuminate\Support\Facades\Log;
 
 class OfficerController extends Controller
 {
-    public function list() {
+    public function list()
+    {
         $officer = People::where('type', 0)->orderByDesc('designation')->paginate(10);
         return view('officer.list', ['people' => $officer]);
     }
 
-    public function create() {
+    public function create()
+    {
         $users = User::all();
         return view('officer.create', ['users' => $users]);
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $formData = $request->validate([
             'name'          => 'required|string|max:255',
             'designation'   => 'required|string|max:255',
@@ -49,12 +52,14 @@ class OfficerController extends Controller
         return redirect(route('officer.list'))->with('success', 'Officer created!');
     }
 
-    public function edit(People $person) {
+    public function edit(People $person)
+    {
         $users = User::all();
         return view('officer.edit', ['person' => $person, 'users' => $users]);
     }
 
-    public function update(Request $request, People $person) {
+    public function update(Request $request, People $person)
+    {
         $formData = $request->validate([
             'name'          => 'required|string|max:255',
             'designation'   => 'required|string|max:255',
@@ -81,13 +86,14 @@ class OfficerController extends Controller
         return redirect(route('officer.list'))->with('success', 'Officer information updated!');
     }
 
-    public function name_search() {
+    public function name_search()
+    {
         $formData = request()->validate([
             'name' => 'required',
         ]);
         $officer = DB::table('people')
-                    ->where('name', 'like', '%' . $formData['name'] . '%')
-                    ->where('type', '=', 0)->paginate(10);
+            ->where('name', 'like', '%' . $formData['name'] . '%')
+            ->where('type', '=', 0)->paginate(10);
         if ($officer->isEmpty()) {
             return view('officer.list', ['people' => null]);
         } else {

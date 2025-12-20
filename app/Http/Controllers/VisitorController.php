@@ -9,17 +9,20 @@ use App\Models\VisitorHistory;
 
 class VisitorController extends Controller
 {
-    public function list() {
+    public function list()
+    {
         $visits = DB::table('visitor_histories as histories')
-                    ->join('people as officers', 'officers.id', '=', 'histories.officer_id')
-                    ->join('people as visitors', 'visitors.id', '=', 'histories.visitor_id')
-                    ->select('histories.*',
-                            'officers.name as officer_name',
-                            'visitors.name as visitor_name',
-                            'visitors.designation as designation',
-                            'visitors.phone as phone')
-                    ->orderByDesc('histories.created_at')
-                    ->paginate(10);
+            ->join('people as officers', 'officers.id', '=', 'histories.officer_id')
+            ->join('people as visitors', 'visitors.id', '=', 'histories.visitor_id')
+            ->select(
+                'histories.*',
+                'officers.name as officer_name',
+                'visitors.name as visitor_name',
+                'visitors.designation as designation',
+                'visitors.phone as phone'
+            )
+            ->orderByDesc('histories.created_at')
+            ->paginate(10);
         // DB::raw('SELECT visitor_histories.*, visitor.name, officer.name
         // FROM visitor_histories
         // INNER JOIN people AS officer ON officer.id = visitor_histories.officer_id
@@ -27,7 +30,8 @@ class VisitorController extends Controller
         return view('visitor.list', ['visits' => $visits]);
     }
 
-    public function create() {
+    public function create()
+    {
         $visitor = [
             'name'          => NULL,
             'designation'   => NULL,
@@ -40,7 +44,8 @@ class VisitorController extends Controller
         return view('visitor.create', ['officers' => $officers, 'visitor' => $visitor]);
     }
 
-    public function phone_search() {
+    public function phone_search()
+    {
         // TODO: add error message if phone number matches with officer
         $formData = request()->validate([
             'phone' => 'required|regex:/^[0-9]{10}$/',
@@ -60,7 +65,8 @@ class VisitorController extends Controller
         return view('visitor.create', ['officers' => $officers, 'visitor' => $visitor]);
     }
 
-    public function name_search() {
+    public function name_search()
+    {
         $formData = request()->validate([
             'name' => 'required',
         ]);
@@ -70,22 +76,25 @@ class VisitorController extends Controller
             return view('visitor.list', ['visits' => null]);
         } else {
             $visits = DB::table('visitor_histories as histories')
-                    ->join('people as officers', 'officers.id', '=', 'histories.officer_id')
-                    ->join('people as visitors', 'visitors.id', '=', 'histories.visitor_id')
-                    ->select('histories.*',
-                            'officers.name as officer_name',
-                            'visitors.name as visitor_name',
-                            'visitors.designation as designation',
-                            'visitors.phone as phone')
-                    ->where('visitor_id', $visitor->id)
-                    ->orderBy('histories.id')
-                    ->orderByDesc('histories.created_at')
-                    ->paginate(10);
+                ->join('people as officers', 'officers.id', '=', 'histories.officer_id')
+                ->join('people as visitors', 'visitors.id', '=', 'histories.visitor_id')
+                ->select(
+                    'histories.*',
+                    'officers.name as officer_name',
+                    'visitors.name as visitor_name',
+                    'visitors.designation as designation',
+                    'visitors.phone as phone'
+                )
+                ->where('visitor_id', $visitor->id)
+                ->orderBy('histories.id')
+                ->orderByDesc('histories.created_at')
+                ->paginate(10);
             return view('visitor.list', ['visits' => $visits]);
         }
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $formData = $request->validate([
             'name'          => 'required|string|max:255',
             'designation'   => 'required|string|max:255',
@@ -115,7 +124,8 @@ class VisitorController extends Controller
         return redirect(route('visitor.list'))->with('success', 'Visit created!');
     }
 
-    public function report(Request $request) {
+    public function report(Request $request)
+    {
         $formData = $request->validate([
             'from'  => 'required|date',
             'to'    => 'required|date',
@@ -123,19 +133,22 @@ class VisitorController extends Controller
         return redirect(route('visitor.paged_report', ['from' => $formData['from'], 'to' => $formData['to']]));
     }
 
-    public function paged_report($from, $to) {
+    public function paged_report($from, $to)
+    {
         $visits = DB::table('visitor_histories as histories')
-                    ->join('people as officers', 'officers.id', '=', 'histories.officer_id')
-                    ->join('people as visitors', 'visitors.id', '=', 'histories.visitor_id')
-                    ->whereDate('histories.created_at', '>=', $from)
-                    ->whereDate('histories.created_at', '<=', $to)
-                    ->select('histories.*',
-                            'officers.name as officer_name',
-                            'visitors.name as visitor_name',
-                            'visitors.designation as designation',
-                            'visitors.phone as phone')
-                    ->orderByDesc('histories.created_at')
-                    ->paginate(10);
+            ->join('people as officers', 'officers.id', '=', 'histories.officer_id')
+            ->join('people as visitors', 'visitors.id', '=', 'histories.visitor_id')
+            ->whereDate('histories.created_at', '>=', $from)
+            ->whereDate('histories.created_at', '<=', $to)
+            ->select(
+                'histories.*',
+                'officers.name as officer_name',
+                'visitors.name as visitor_name',
+                'visitors.designation as designation',
+                'visitors.phone as phone'
+            )
+            ->orderByDesc('histories.created_at')
+            ->paginate(10);
         return view('visitor.paged_report', ['visits' => $visits]);
     }
 }

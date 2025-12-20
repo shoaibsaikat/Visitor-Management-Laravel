@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\OfficerController;
 use App\Http\Controllers\VisitorController;
+use App\Http\Middleware\EnsureModificationAuthorization;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -40,18 +41,18 @@ require __DIR__.'/auth.php';
 Route::middleware(['auth'])->controller(OfficerController::class)->prefix('officer')->name('officer.')
 ->group(function () {
     Route::get('/', 'list')->name('list');
-    Route::get('/create', 'create')->name('create');
+    Route::get('/create', 'create')->name('create')->middleware(EnsureModificationAuthorization::class);
     Route::post('/store', 'store')->name('store');
     Route::post('/name_search', 'name_search')->name('name_search');
-    Route::get('/{person}/edit', 'edit')->name('edit');
-    Route::put('/{person}/update', 'update')->name('update');
+    Route::get('/{person}/edit', 'edit')->name('edit')->middleware(EnsureModificationAuthorization::class);;
+    Route::put('/{person}/update', 'update')->name('update')->middleware(EnsureModificationAuthorization::class);;
 });
 
 // Visitor
 Route::middleware(['auth'])->controller(VisitorController::class)->prefix('visitor')->name('visitor.')
 ->group(function () {
     Route::get('/', 'list')->name('list');
-    Route::get('/create', 'create')->name('create');
+    Route::get('/create', 'create')->name('create')->middleware(EnsureModificationAuthorization::class);;
     Route::post('/store', 'store')->name('store');
     Route::post('/phone_search', 'phone_search')->name('phone_search');
     Route::post('/name_search', 'name_search')->name('name_search');

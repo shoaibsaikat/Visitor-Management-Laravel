@@ -20,9 +20,9 @@ class VisitorController extends Controller
                             'visitors.phone as phone')
                     ->orderByDesc('histories.created_at')
                     ->paginate(10);
-        // DB::raw('SELECT visitor_histories.*, visitor.name, officer.name 
-        // FROM visitor_histories 
-        // INNER JOIN people AS officer ON officer.id = visitor_histories.officer_id 
+        // DB::raw('SELECT visitor_histories.*, visitor.name, officer.name
+        // FROM visitor_histories
+        // INNER JOIN people AS officer ON officer.id = visitor_histories.officer_id
         // INNER JOIN people AS visitor ON visitor.id = visitor_histories.officer_id');
         return view('visitor.list', ['visits' => $visits]);
     }
@@ -86,9 +86,6 @@ class VisitorController extends Controller
     }
 
     public function store(Request $request) {
-        if ($request->user()->cannot('modify', VisitorHistory::class)) {
-            abort(403);
-        }
         $formData = $request->validate([
             'name'          => 'required|string|max:255',
             'designation'   => 'required|string|max:255',
@@ -108,7 +105,7 @@ class VisitorController extends Controller
                 'nid'           => $formData['nid'],
                 'type'          => 1,
             ]);
-        }        
+        }
         $history                = new VisitorHistory;
         $history->card_no       = $formData['card'];
         $history->officer_id    = $formData['officer'];

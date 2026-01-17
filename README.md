@@ -20,7 +20,7 @@ A Visitor Management System made with Laravel
 3. http://127.0.0.1:8000 (for first time browser may ask you to create encryption key)
 
 # Note
-1. pattern used for passowrd is for example for user, "<user>@dev.com" is "<user>@2023". users are availble in users table
+1. pattern used for password is for example for user, "<user>@dev.com" is "<user>@2023". users are availble in users table
 2. for laravel installation for the first time you can follow, "https://laravel.com/docs/"
 3. depending on the linux distribution, you might need to do the followings,
     - to resolve mysqli extension not found issue, edit /etc/php/php.ini and ensure the following line is uncommented:

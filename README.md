@@ -27,3 +27,4 @@ A Visitor Management System made with Laravel
         extension=mysqli
     - to resolve could not find driver error in laravel, edit /etc/php/php.ini and ensure the following line is uncommented:
         extension=pdo_mysql
+4. for upgrading laravel run "composer update" after everything is done by the documentation
